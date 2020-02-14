@@ -1,0 +1,18 @@
+version: "3"
+services:
+  reverseproxy:
+    image: claudioacioli/reverseproxy
+    ports:
+      - 8080:8080
+    restart: always
+    depends_on:
+      - backend-user
+      - backend-feed
+  backend-user:
+    image: claudioacioli/udacity-restapi-user
+  backend-feed:
+    image: claudioacioli/udacity-restapi-feed
+  frontend:
+    image: claudioacioli/udacity-frontend
+    ports:
+      - "8100:80"
