@@ -10,8 +10,26 @@ services:
       - backend-feed
   backend-user:
     image: claudioacioli/udacity-restapi-user
+    environment:
+      POSTGRESS_USERNAME: $POSTGRESS_USERNAME
+      POSTGRESS_PASSWORD: $POSTGRESS_PASSWORD
+      POSTGRESS_DB: $POSTGRESS_DB
+      POSTGRESS_HOST: $POSTGRESS_HOST
+      AWS_REGION: $AWS_REGION
+      AWS_PROFILE: $AWS_PROFILE
+      AWS_BUCKET: $AWS_BUCKET
+      JWT_SECRET: $JWT_SECRET
   backend-feed:
     image: claudioacioli/udacity-restapi-feed
+    environment:
+      POSTGRESS_USERNAME: $POSTGRESS_USERNAME
+      POSTGRESS_PASSWORD: $POSTGRESS_PASSWORD
+      POSTGRESS_DB: $POSTGRESS_DB
+      POSTGRESS_HOST: $POSTGRESS_HOST
+      AWS_REGION: $AWS_REGION
+      AWS_PROFILE: $AWS_PROFILE
+      AWS_BUCKET: $AWS_BUCKET
+      JWT_SECRET: $JWT_SECRET
   frontend:
     image: claudioacioli/udacity-frontend
     ports:
