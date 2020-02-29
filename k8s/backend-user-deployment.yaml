@@ -1,12 +1,11 @@
 apiVersion: apps/v1
-#apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
     service: backend-user
   name: backend-user
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       service: backend-user
@@ -19,6 +18,17 @@ spec:
         - name: udacity-restapi-user
           image: claudioacioli/udacity-restapi-user
           imagePullPolicy: Always
+          env:
+            - name: POSTGRESS_HOST
+              value: "host"
+            - name: POSTGRESS_USERNAME
+              value: "username"
+            - name: POSTGRESS_PASSWORD
+              value: "password"
+            - name: POSTGRESS_DB
+              value: "db"
+            - name: JWT_SECRET
+              value: "secret"
           resources:
             requests:
               memory: "64Mi"
