@@ -20,15 +20,30 @@ spec:
           imagePullPolicy: Always
           env:
             - name: POSTGRESS_HOST
-              value: "host"
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: POSTGRESS_HOST
             - name: POSTGRESS_USERNAME
-              value: "username"
+              valueFrom:
+                secretKeyRef:
+                  name: env-secret
+                  key: POSTGRESS_USERNAME
             - name: POSTGRESS_PASSWORD
-              value: "password"
+              valueFrom:
+                secretKeyRef:
+                  name: env-secret
+                  key: POSTGRESS_PASSWORD
             - name: POSTGRESS_DB
-              value: "db"
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: POSTGRESS_DB
             - name: JWT_SECRET
-              value: "secret"
+              valueFrom:
+                configMapKeyRef:
+                  name: env-config
+                  key: JWT_SECRET
           resources:
             requests:
               memory: "64Mi"
