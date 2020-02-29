@@ -1,12 +1,11 @@
 apiVersion: apps/v1
-#apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   labels:
     service: backend-feed
   name: backend-feed
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       service: backend-feed
@@ -16,13 +15,24 @@ spec:
         service: backend-feed
     spec:
       containers:
-      - name: udacity-restapi-feed
-        image: claudioacioli/udacity-restapi-feed
-        imagePullPolicy: Always
-        resources:
-          requests:
-            memory: "64Mi"
-            cpu: "250m"
-          limits:
-            memory: "1024Mi"
-            cpu: "500m"
+        - name: udacity-restapi-feed
+          image: claudioacioli/udacity-restapi-feed
+          imagePullPolicy: Always
+          env:
+            - name: POSTGRESS_HOST
+              value: "host"
+            - name: POSTGRESS_USERNAME
+              value: "username"
+            - name: POSTGRESS_PASSWORD
+              value: "password"
+            - name: POSTGRESS_DB
+              value: "db"
+            - name: JWT_SECRET
+              value: "secret"
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "1024Mi"
+              cpu: "500m"
